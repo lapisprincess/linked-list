@@ -2,31 +2,62 @@
 #include <stdlib.h>
 #include "linked_list.h"
 
-int linked_list_free() {
-    struct node *current = head;
+struct node {
+    int value;
+    struct node *next;
+};
+
+Node* make_node(int value) {
+    Node *node = (Node*) malloc(sizeof(Node));
+    node->value = value;
+    node->next = NULL;
+    return node;
+}
+
+struct list {
+    Node * head;
+};
+
+List* makelist() {
+    List *list = malloc(sizeof(List));
+    list->head = NULL;
+    return list;
+}
+
+void destroy(List *list) {
+    struct node *current = list->head;
+    struct node *next = current->next;
     while (current != NULL) {
-        struct node *next = current->next;
+        next = current->next;
         free(current);
         current = next;
     }
-    return 0;
+    free(list);
 }
 
-int print_linked_list() {
+void display(List *list) {
     printf("[");
-    struct node *current = head;
+    struct node *current = list->head;
     while (current != NULL) {
         printf("%d", current->value);
         if (current->next != NULL) { printf(", "); }
         current = current->next;
     }
     printf("]\n");
-    return 0;
 }
 
-int linked_list_size() {
+void append(List *list, int value) {
+    if (list->head == NULL)
+        list->head = make_node(value);
+    Node *current = list->head;
+    while (current->next != NULL)
+        current = current->next;
+    current->next = make_node(value);
+}
+
+int size(List *list) {
     int out = 0;
-    struct node *current = head;
+    struct node *current = list->head;
     while (current != NULL) {
         current = current->next;
         out++;
@@ -34,26 +65,8 @@ int linked_list_size() {
     return out;
 }
 
-int linked_list_insert_at_head(int value) {
-    struct node *old_head = head;
-    head = (struct node*) malloc(sizeof(struct node));
-    head->value = value;
-    head->next = old_head;
-    return 0;
-}
-
-int linked_list_append(int value) {
-    struct node *current = head;
-    while (current->next != NULL)
-        current = current->next;
-    current->next = (struct node*) malloc(sizeof(struct node));
-    current->next->value = value;
-    current->next->next = NULL;
-    return 0;
-}
-
-int linked_list_get(int index) {
-    struct node *current = head;
+int get(List *list, int index) {
+    struct node *current = list->head;
     for (int i = 0; i < index; i++) { current = current->next; }
     return current->value;
 }

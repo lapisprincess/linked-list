@@ -1,15 +1,21 @@
+#include <time.h>
 #include <stdio.h>
 #include "linked_list.c"
 
 int main(int argc, char *argv[]) {
-    printf("%d\n", linked_list_size());
-    linked_list_insert_at_head(5);
-    printf("%d\n", linked_list_size());
-    print_linked_list();
-    linked_list_append(10);
-    linked_list_insert_at_head(15);
-    print_linked_list();
-    printf("%d\n", linked_list_get(0));
+    List *list = makelist();
+    display(list);
 
-    linked_list_free();
+    srand(time(NULL));
+    append(list, rand()%20);
+    append(list, rand()%20);
+    append(list, rand()%20);
+    append(list, rand()%20);
+    display(list);
+
+    int i = 2;
+    printf("Value at index %d: %d\n", i, get(list, i));
+    printf("List size: %d\n", size(list));
+
+    destroy(list);
 }

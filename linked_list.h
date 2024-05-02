@@ -1,14 +1,17 @@
+#ifndef LINKED_LIST_HEADER
+#define LINKED_LIST_HEADER
+
 #include <stdlib.h>
 
-struct node {
-    int value;
-    struct node *next;
-};
-struct node *head = NULL;
+typedef struct node Node;
+typedef struct list List;
 
-int linked_list_free();
-int linked_list_size();
-int print_linked_list();
+List* makelist();
+void destroy(List *list);
+void display(List *list);
+void append(List *list, int val);
 
-int linked_list_append(int val);
-int linked_list_insert_at_head(int val);
+int size(List *list);
+int get(List *list, int index);
+
+#endif
