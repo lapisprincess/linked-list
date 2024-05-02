@@ -35,7 +35,6 @@ int linked_list_size() {
 }
 
 int linked_list_insert_at_head(int value) {
-    // int *i = malloc(5);
     struct node *old_head = head;
     head = (struct node*) malloc(sizeof(struct node));
     head->value = value;
