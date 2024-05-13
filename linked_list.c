@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "linked_list.h"
 
+
 struct node {
     int value;
     struct node *next;
@@ -14,11 +15,12 @@ Node* make_node(int value) {
     return node;
 }
 
+
 struct list {
     Node * head;
 };
 
-List* makelist() {
+List* make_list() {
     List *list = malloc(sizeof(List));
     list->head = NULL;
     return list;

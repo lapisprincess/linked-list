@@ -3,7 +3,7 @@
 #include "linked_list.c"
 
 int main(int argc, char *argv[]) {
-    List *list = makelist();
+    List *list = make_list();
     display(list);
 
     srand(time(NULL));
